@@ -38,6 +38,8 @@ func main() {
 		}
 		fmt.Println(buf.String())
 
+		w.Header().Set("Access-Control-Allow-Origin","http://localhost:3000")
+
 		_, err := fmt.Fprint(w, buf.String())
 		if err != nil {
 			return
