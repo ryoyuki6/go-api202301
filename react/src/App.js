@@ -1,27 +1,30 @@
 // axios を import
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
+  const [getData, setGetData] = useState([]);
 
-  // サーバーにリクエストしてレスポンスを待っている状態
-  const fetchData = async () => {
-    const response = await axios.get(
-
-      // レスポンスデータの取得、交換
-      // Prommise が Fulfilled または Rejected となるまで待つ
-      // Promiseインスタンスの状態が変わったら処理を再開する
-      // "https://jsonplaceholder.typicode.com/users"
-      "http://localhost:8080/health_data"
-    );
-
-    // 非同期処理が完了したら返される
-    return console.log(response.data);
-  };
-  fetchData();
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("http://localhost:8080/health_data");
+      setGetData(response.data);
+    };
+    fetchData();
+  }, []);
+  console.log("Get data : ", getData);
 
   return (
-    <p>axios!!!</p>
-  );
+    <>
+      <ul>
+        {getData.map((data) => (
+          <li key={data.user_id}>
+            user_id : {data.user_id}, weight : {data.weight}, date : {data.date}
+          </li>
+        ))}
+      </ul>
+    </>
+  )
 }
 
 export default App;
