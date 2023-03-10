@@ -6,27 +6,26 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
 )
 
 type HealthData struct {
-	UserID      int       `json:"user_id"`
-	Weifgt   float64   `json:"weight"`
-	Date time.Time `json:"date"`
+	Month	int		`json:"month"`
+	Day		int		`json:"day"`
+	Weifgt	float64	`json:"weight"`
 }
 
 var health_data = []HealthData{{
-	UserID:      1,
-	Weifgt:   55.5,
-	Date: time.Now(),
+	Month:	1,
+	Day:	1,
+	Weifgt:	55.5,
 }, {
-	UserID:      2,
-	Weifgt:   66.6,
-	Date: time.Now(),
+	Month:	1,
+	Day:	2,
+	Weifgt:	66.6,
 }, {
-	UserID:      3,
-	Weifgt:   77.7,
-	Date: time.Now(),
+	Month:	1,
+	Day:	3,
+	Weifgt:	77.7,
 }}
 
 func main() {
