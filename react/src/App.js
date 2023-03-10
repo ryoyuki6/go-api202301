@@ -18,7 +18,7 @@ function App() {
     <>
       <ul>
         {getData.map((data) => (
-          <li key={data.user_id}>
+          <li key={data.day}>
             month : {data.month}, day : {data.day}, weight : {data.weight}
           </li>
         ))}
