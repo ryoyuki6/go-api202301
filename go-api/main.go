@@ -23,6 +23,14 @@ func getHalthdata(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, health_data)
 }
 
+func postHalthdata(c *gin.Context) {
+	var newHalthdata HealthData
+	if err := c.BindJSON(&newHalthdata); err != nil {
+		return
+	}
+	health_data = append(health_data, newHalthdata)
+}
+
 func main() {
 	router := gin.Default()
 
@@ -32,5 +40,6 @@ func main() {
 	router.Use(cors.New(config))
 
 	router.GET("/health_data", getHalthdata)
+	router.POST("/health_data", postHalthdata)
 	router.Run("localhost:8080")
 }
