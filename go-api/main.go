@@ -8,15 +8,16 @@ import (
 )
 
 type HealthData struct {
+	Id		int		`json:"id"`
 	Month	int		`json:"month"`
 	Day		int		`json:"day"`
 	Weight	float64	`json:"weight"`
 }
 
 var health_data = []HealthData{
-	{Month:	1,	Day:	1,	Weight:	55.5},
-	{Month:	1,	Day:	2,	Weight:	66.6},
-	{Month:	1,	Day:	3,	Weight:	77.7},
+	{Id:1, Month:1,	Day:1, Weight:55.5},
+	{Id:2, Month:1,	Day:2, Weight:66.6},
+	{Id:3, Month:1,	Day:3, Weight:77.7},
 }
 
 func getHalthdata(c *gin.Context) {
