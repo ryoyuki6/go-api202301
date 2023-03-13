@@ -70,6 +70,22 @@ func patchHealthdata(c *gin.Context) {
 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "the id's health data not fount"})
 }
 
+func deleteHealthdata(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return
+	}
+
+	for i, t := range health_data {
+		if t.ID == id {
+			health_data = append(health_data[:i],health_data[i+1:]...)
+			c.IndentedJSON(http.StatusOK, gin.H{"message": "health_data(" + strconv.Itoa(id) + ") is deleted"})
+			return
+		}
+	}
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "health_data not found"})
+}
+
 func main() {
 	router := gin.Default()
 
@@ -82,6 +98,7 @@ func main() {
 	router.GET("/health_data/:id", getHealthdataById)
 	router.POST("/health_data", postHealthdata)
 	router.PATCH("/health_data/:id", patchHealthdata)
+	router.DELETE("/health_data/:id", deleteHealthdata)
 
 	router.Run("localhost:8080")
 }
