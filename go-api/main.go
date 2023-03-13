@@ -48,6 +48,28 @@ func postHealthdata(c *gin.Context) {
 	health_data = append(health_data, newHealthdata)
 }
 
+func patchHealthdata(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return
+	}
+
+	var health_data_patch HealthData
+	health_data_patch.ID = id
+	if err = c.BindJSON(&health_data_patch); err != nil {
+		return
+	}
+
+	for i, t := range health_data {
+		if t.ID == id {
+			health_data[i] = health_data_patch
+			c.IndentedJSON(http.StatusOK, health_data_patch)
+			return
+		}
+	}
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "the id's health data not fount"})
+}
+
 func main() {
 	router := gin.Default()
 
@@ -59,5 +81,7 @@ func main() {
 	router.GET("/health_data", getHealthdata)
 	router.GET("/health_data/:id", getHealthdataById)
 	router.POST("/health_data", postHealthdata)
+	router.PATCH("/health_data/:id", patchHealthdata)
+
 	router.Run("localhost:8080")
 }
