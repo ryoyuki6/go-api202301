@@ -8,6 +8,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get("http://localhost:8080/health_data");
+      // const response = await axios.get("http://localhost:8080/health_data");
       setGetData(response.data);
     };
     fetchData();
