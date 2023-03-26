@@ -90,6 +90,7 @@ func main() {
 
 	// CORS 対応
 	config := cors.DefaultConfig()
+	// config.AllowOrigins = []string{"http://localhost:3000"}
 	config.AllowOrigins = []string{"http://localhost:3000"}
 	router.Use(cors.New(config))
 
@@ -99,5 +100,6 @@ func main() {
 	router.PATCH("/health_data/:id", patchHealthdata)
 	router.DELETE("/health_data/:id", deleteHealthdata)
 
-	router.Run("localhost:8080")
+	// router.Run("localhost:8080")
+	router.Run(":8080")
 }
